@@ -4,7 +4,7 @@
 }
 
 <h1>景點們</h1>
-<div id="d1">
+<div id="viewcard" class="row row-cols-1 row-cols-md-3 g-4">
 
 </div>
 
@@ -16,17 +16,18 @@
             var imgSrc = file && file.img && file.img[0] && file.img[0].text;
             return(
                 `
-                        <div class="card" style="width: 18rem;">
-                                    <img src="${imgSrc}" class="card-img-top" alt="未有圖片">
-                            <div class="card-body">
-                                        <h5 class="card-title">${stitle}</h5>
-                                        <p class="card-text">${xbody}</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
+                                         <div class="col">
+            <div class="card">
+                        <img src="${imgSrc}" class="card-img-top" alt="未有圖片">
+                <div class="card-body">
+                            <h5 class="card-title">${stitle}</h5>
+                                    <p class="card-text">${xbody}</p>
+                </div>
+            </div>
+        </div>)
                 `
             )            
-        })       
-        document.querySelector('#d1').innerHTML = datas.join("");
+        })
+        document.querySelector('#viewcard').innerHTML = datas.join("");
     </script>
 }
