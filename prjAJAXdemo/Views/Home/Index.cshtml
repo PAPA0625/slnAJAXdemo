@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Styles{
+    <style>
+        .display-4{background-color:brown;
+        color:burlywood;
+        border-radius:10px}
+        p{background-color:blueviolet;
+        color:gold;
+        border-radius:10px}
+    </style>   
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>   
+    
+    <table id="tableEmployee" class="table table-bordered  table-hover">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年資</th>
+                <th>薪水</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+@section Scripts{
+    <script>
+        var emp = {
+            "employees": [
+                { "name": "Tom", "workYears": 3, "salary": 35000 },
+                { "name": "Jack", "workYears": 5, "salary": 40000 },
+                { "name": "Mary", "workYears": 7, "salary": 45000 }
+            ]
+        };
+
+            //for(var e=0;e<emp.employees.length;e++)
+            //{
+            //console.log(emp.employees[e].name)
+            //console.log(emp.employees[e].workYears)
+            //console.log(emp.employees[e].salary)
+            //}
+
+        var datas = emp.employees.map(employee => {var{name,workYears,salary}=employee;
+        return(
+            `
+            <tr>
+                 <td>${name}</td>
+                 <td>${workYears}</td>
+                 <td>${salary}</td>
+            </tr>
+            `
+        )
+        })
+
+        document.querySelector('#tableEmployee>tbody').innerHTML=datas.join("")
+    </script>
+}

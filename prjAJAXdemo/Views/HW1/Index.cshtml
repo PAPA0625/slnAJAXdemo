@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>景點們</h1>
+<div id="d1">
+
+</div>
+
+@section Scripts{
+    <script src="~/js/travel.js"></script>
+    <script>
+        var datas = spots.CommonFormat.Section.map(Section => {
+            var { stitle, xbody, file } = Section;
+            var imgSrc = file && file.img && file.img[0] && file.img[0].text;
+            return(
+                `
+                        <div class="card" style="width: 18rem;">
+                                    <img src="${imgSrc}" class="card-img-top" alt="未有圖片">
+                            <div class="card-body">
+                                        <h5 class="card-title">${stitle}</h5>
+                                        <p class="card-text">${xbody}</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                `
+            )            
+        })       
+        document.querySelector('#d1').innerHTML = datas.join("");
+    </script>
+}

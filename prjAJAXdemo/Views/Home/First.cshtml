@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "First";
+}
+
+<h1>First</h1>
+<button id="btnStar" class="btn btn-primary">貓貓 啟動!</button>
+<div id="div1" class="alert alert-info"></div>
+
+@section Scripts{
+    <script>
+        document.querySelector('#btnStar').addEventListener('click',()=>{
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','/api/index?name=小趴趴');
+            xhr.send();
+            xhr.addEventListener('load',()=>{
+                var data = xhr.responseText;
+                document.querySelector('#div1').innerHTML = data;
+            })
+        })
+    </script>
+}
+
