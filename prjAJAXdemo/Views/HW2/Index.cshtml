@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
-        <form id="memberform" method="post" action="~/api/register">
+        <form id="memberform" method="post" action="~/api/CheckAccount">
             <div class="mb-3">
                 <label for="inputName" class="form-label">姓名</label>
                 <input type="text" class="form-control" id="inputName" name="name">
@@ -34,19 +34,19 @@
 </div>
 @section Scripts{
     <script>
-        const ipname = document.querySelector('#inputName');
+        
         const divmsg = document.querySelector('#msg');
-
-        ipname.addEventListener('blur', () => {
+        const name = document.querySelector('#inputName')
+        name.addEventListener('blur', () => {
             const xhr = new XMLHttpRequest();
-
+            
             xhr.addEventListener('load', () => {
                 const data = xhr.responseText;
                 divmsg.innerHTML = data;
             })
-
+            const formdata = new FormData(document.querySelector('#memberform'));
             xhr.open('POST', '@Url.Content("~/api/CheckAccount")');
-            xhr.send(`name=${ipname.value}`);
+            xhr.send(formdata);
         })
     </script>
 }
