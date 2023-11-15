@@ -4,18 +4,52 @@
 
 <h1>First</h1>
 <button id="btnStar" class="btn btn-primary">貓貓 啟動!</button>
+<button id="btnStop" class="btn btn-primary">Ajax Stop</button>
+<img id="img1" style="display:none" src="~/images/Skateboarding.gif" />
 <div id="div1" class="alert alert-info"></div>
 
 @section Scripts{
     <script>
-        document.querySelector('#btnStar').addEventListener('click',()=>{
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET','/api/index?name=小趴趴');
-            xhr.send();
-            xhr.addEventListener('load',()=>{
-                var data = xhr.responseText;
-                document.querySelector('#div1').innerHTML = data;
+        const btn = document.querySelector('#btnStar');
+        const btnStop = document.querySelector('#btnStop');
+        const theDiv = document.querySelector('#div1');
+        const imgLoading = document.querySelector('#img1');
+        var xhr = new XMLHttpRequest();
+        btnStop.addEventListener('click', () => {
+            xhr.abort();
+        })
+
+        btn.addEventListener('click', () => {
+            
+            //@Url.Action("Index","Api")
+            //@Url.Content("~/Api/Index")
+            xhr.addEventListener('loadstart', () => {
+                theDiv.innerHTML += "Ajax開始<br />"
+                imgLoading.style.display = "inline";
+                btn.setAttribute('disabled', 'disabled');
+                btn.innerHTML = "Loading...";
             })
+            xhr.addEventListener('loadend', () => {
+                theDiv.innerHTML += "Ajax結束<br />"
+                imgLoading.style.display = "none";
+                btn.removeAttribute("disabled");
+                btn.innerHTML = "Ajax Start";
+            })
+            xhr.addEventListener('load', () => {
+                var data = xhr.responseText;
+                theDiv.innerHTML += data;
+            })
+            xhr.addEventListener('timeout', () => {
+                theDiv.innerHTML += '伺服器忙碌中，請稍後再來< br />';
+            })
+            xhr.addEventListener('abort', () => {
+                theDiv.innerHTML += '您停止了程式的執行< br />';
+            })
+
+            xhr.open('GET', '@Url.Content("~/api/index")?name=小趴趴');
+            xhr.timeout = 3000;
+            xhr.send();
+            
         })
     </script>
 }

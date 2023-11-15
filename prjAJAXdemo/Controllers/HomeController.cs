@@ -7,10 +7,12 @@ namespace prjAJAXdemo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DemoContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DemoContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult First()
@@ -32,6 +34,14 @@ namespace prjAJAXdemo.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        public IActionResult Member()
+        {
+            return View(_context.Members);
         }
     }
 }
