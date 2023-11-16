@@ -37,7 +37,7 @@ namespace prjAJAXdemo.Controllers
             }
             return Content(strpath);
         }
-        public IActionResult CheckAccount(string? name)
+        public IActionResult CheckAccount(string name)
         {
             if(_context.Members.Any(Members => Members.Name == name))
             {
