@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<select id="selCity"></select>
+<select id="sel區"></select>
+<select id="sel路"></select>
+<div id="address"></div>
+
+@section Scripts{
+    <script>
+        const selCity = document.querySelector('#selCity')
+        const sel區 = document.querySelector('#sel區')
+        const sel路 = document.querySelector('#sel路')
+        const add = document.querySelector('#address')
+
+        selCity.addEventListener('change', () => {
+            load區();
+        })
+        sel區.addEventListener('change', () => {
+            load路();
+        })
+        sel路.addEventListener('change', () => {
+            add.innerHTML = `${selCity.value}${sel區.value}${sel路.value}`;
+        })
+
+        async function loadCity(){
+            const response = await fetch ('@Url.Content("~/api/city")')
+            const datas = await response.json();
+            const cities = datas.map(city => `<option value='${city}'>${city}</option>`)
+            selCity.innerHTML = cities.join("");
+            load區();
+        }
+        async function load區() {
+            const response = await fetch(`@Url.Content("~/api/cube")?city=${selCity.value}`)
+            const datas = await response.json();
+            const cube = datas.map(cube => `<option value='${cube}'>${cube}</option>`)
+            sel區.innerHTML = cube.join("");
+            load路();
+        }
+        async function load路() {
+            const response = await fetch(`@Url.Content("~/api/road")?cube=${sel區.value}`)
+            const datas = await response.json();
+            const road = datas.map(road => `<option value='${road}'>${road}</option>`)
+            sel路.innerHTML = road.join("");            
+        }
+        loadCity();
+    </script>
+}

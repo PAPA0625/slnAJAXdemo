@@ -43,19 +43,30 @@
         btn.addEventListener('click', event => {
             event.preventDefault();//將滑鼠點到的物件取消預設功能 在此是取消submit跳轉頁面的功能用
 
-            const xhr = new XMLHttpRequest();
+            //const xhr = new XMLHttpRequest();
 
-            xhr.addEventListener('load', () => {
-                const data = xhr.responseText;
-                divMessage.innerHTML = data;                
-            })
+            //xhr.addEventListener('load', () => {
+            //    const data = xhr.responseText;
+            //    divMessage.innerHTML = data;                
+            //})
 
             const formdata = new FormData(document.querySelector('#memberform'));
         
-            xhr.open('POST', '@Url.Content("~/api/register")');
-            //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            //xhr.send(`name=${name.value}&age=${age.value}&email=${email.value}`);
-            xhr.send(formdata);
+            //xhr.open('POST', '@Url.Content("~/api/register")');
+            ////xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            ////xhr.send(`name=${name.value}&age=${age.value}&email=${email.value}`);
+            //xhr.send(formdata);
+
+            fetch('@Url.Content("~/api/register")',{
+                method:'POST',
+                body: formdata
+            })
+            .then(respomse => {
+                if(respomse.ok){
+                    alert("新增成功");
+                        location.href = '@Url.Content("~/home/member")';
+                }
+            })
         })
      </script>
 

@@ -43,5 +43,13 @@ namespace prjAJAXdemo.Controllers
         {
             return View(_context.Members);
         }
+        public IActionResult Address()
+        {
+            return View();
+        }
+        public IActionResult fetch()
+        {
+            return View();
+        }
     }
 }
