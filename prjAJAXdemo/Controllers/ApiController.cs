@@ -37,9 +37,9 @@ namespace prjAJAXdemo.Controllers
             }
             return Content(strpath);
         }
-        public IActionResult CheckAccount(string name)
+        public IActionResult CheckAccount(MemberViewModel vm)
         {
-            if(_context.Members.Any(Members => Members.Name == name))
+            if(_context.Members.Any(p => p.Name == vm.name))
             {
                 return Content("此名稱已被使用");
             }

@@ -24,12 +24,13 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "desktop-rae7e6c.Demo.dbo",
+   "UiHint": "desktop-fe93834.Demo.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDateOnlyTimeOnly": false,
    "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
    "UseHierarchyId": false,
